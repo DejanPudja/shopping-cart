@@ -5,7 +5,7 @@ export default class Product{
         this.product_photo = photo;
         this.product_price = price;
     }
-    show(){
+    showProducts(){
         let field = document.querySelector('.product-field');
         let item = document.createElement('div');
         item.classList = 'product';
@@ -23,9 +23,9 @@ export default class Product{
             </div>`;
         field.append(item); 
     }
-    storage({productNumber,productName,product_id,product_price,product_amount,stock,inputValue}){
+    productStorage({productNumber,productName,product_id,product_price,product_amount,stock,inputValue}){
 
-        let value = [productNumber,product_id,product_price,product_amount];
+        let arrayValues = [productNumber,product_id,product_price,product_amount];
 
         if(isNaN(inputValue)){
             alert('You did not enter a number');
@@ -33,10 +33,10 @@ export default class Product{
             alert('Wrong entry')
         }else{
             if(inputValue <= stock){
-                if(localStorage.getItem(`product${productName}`)){      
-                    localStorage.setItem(`product${productName}`, JSON.stringify([productNumber,product_id,product_price,JSON.parse(localStorage.getItem(`product${productName}`))[3] + inputValue]));
+                if(localStorage.getItem(`product${productNumber}`)){      
+                    localStorage.setItem(`product${productNumber}`, JSON.stringify([productNumber,product_id,product_price,JSON.parse(localStorage.getItem(`product${productNumber}`))[3] + inputValue]));
                 }else{
-                    localStorage.setItem(`product${productName}`, JSON.stringify(value));
+                    localStorage.setItem(`product${productNumber}`, JSON.stringify(arrayValues));
                 }
                 alert(`You have successfully add ${inputValue} ${productName}  in basket`);
             }else{
@@ -45,4 +45,35 @@ export default class Product{
         }
         location.reload();
     }
+    getProductsFromStorage(products){
+        let arrayIdFromStorage = [];
+        let arrayProductNumber = [];
+
+        for(let i = 0; i < products.length; i++ ){
+            if(localStorage.getItem(`product${i+1}`)){
+                arrayIdFromStorage[i] = JSON.parse(localStorage.getItem(`product${i+1}`))[1];
+                arrayProductNumber[i] = JSON.parse(localStorage.getItem(`product${i+1}`))[0];
+            }
+        }
+        let newArrayId = arrayIdFromStorage.filter(n=>n);
+        let newProductNumber = arrayProductNumber.filter(n=>n);
+
+        return {newArrayId,newProductNumber};
+
+    }
+    // getAmountFromStorage(){
+    //     const amountProducts = [];
+    //     for(let i = 0; i < 6; i++ ){
+    //         if(localStorage.getItem(`product${i+1}`)){
+    //             if(JSON.parse(localStorage.getItem(`product${i+1}`))[3] == 10){
+    //                 amountProducts[i] = 0;
+    //             }else{
+    //                 amountProducts[i] = JSON.parse(localStorage.getItem(`product${i+1}`))[3]
+    //             }
+    //         }else{
+    //             amountProducts[i] = 10;
+    //         }
+    //         return amountProducts[i];
+    //     }
+    // }
 }
