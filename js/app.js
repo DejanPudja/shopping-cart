@@ -135,6 +135,7 @@ btnBuy.addEventListener('click', function(){
 
 
 
+//jos ovaj deo trebam da sredim 
 
 
 // let ni = [];
