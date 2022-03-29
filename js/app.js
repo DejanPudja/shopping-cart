@@ -5,41 +5,41 @@ import Cart from "./base/Cart.js";
 
 let APIClient = new ApiClient();
 
-// Async await examples
-console.log(await APIClient.get('SearchProducts'));
-console.log(await APIClient.get('GetProduct', {id: 1}));
-await APIClient.post('Purchase', [
-    {
-        product_id: 73,
-        amount: 21
-    },
-    {
-        product_id: 22,
-        amount: 21
-    }
-]); // APIClient will do a console.log()
+// // Async await examples
+// console.log(await APIClient.get('SearchProducts'));
+// console.log(await APIClient.get('GetProduct', {id: 1}));
+// await APIClient.post('Purchase', [
+//     {
+//         product_id: 73,
+//         amount: 21
+//     },
+//     {
+//         product_id: 22,
+//         amount: 21
+//     }
+// ]); // APIClient will do a console.log()
 
-// Regular promise examples
-APIClient.get('SearchProducts')
-    .then((result) => {
-        console.log(result);
-    });
+// // Regular promise examples
+// APIClient.get('SearchProducts')
+//     .then((result) => {
+//         console.log(result);
+//     });
 
-APIClient.get('GetProduct', {id: 1})
-    .then((result) => {
-        console.log(result);
-    });
+// APIClient.get('GetProduct', {id: 1})
+//     .then((result) => {
+//         console.log(result);
+//     });
 
-APIClient.post('Purchase', [
-    {
-        product_id: 73,
-        amount: 21
-    },
-    {
-        product_id: 22,
-        amount: 22
-    }
-]); // APIClient will do a console.log()
+// APIClient.post('Purchase', [
+//     {
+//         product_id: 73,
+//         amount: 21
+//     },
+//     {
+//         product_id: 22,
+//         amount: 22
+//     }
+// ]); // APIClient will do a console.log()
 
 const products = await APIClient.get('SearchProducts');
 
@@ -137,11 +137,7 @@ btnBuy.addEventListener('click', function(){
 
 
 
-// let ni = [];
-// for(let i = 0; i < 6; i++){
-//     ni[i] = product.getAmountFromStorage();
-// }
-// console.log(ni);
+//Ostalo mi je jos da sredim ovaj deo dole
 
 
 const amountProducts = [];
@@ -158,14 +154,3 @@ const amountProducts = [];
             
         }
 console.log(amountProducts);
-
-
-
-
-
-
-
-
-// const product = new Product(await APIClient.get('GetProduct', {id: 73}));
-
-

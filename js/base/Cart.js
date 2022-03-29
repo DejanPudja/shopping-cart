@@ -22,20 +22,14 @@ export default class Cart{
         field.append(item); 
     }
     removeProduct({btn_id,product_id,product_name,product_price,product_amount,amount_field}){
-        
         let arrayValues = [btn_id,product_id,product_price,product_amount];
 
         if(isNaN(amount_field)){
-        
             alert('You did not enter a numeric value')
-    
         }else if(Number(amount_field) > JSON.parse(localStorage.getItem(`product${btn_id}`))[3]){
-    
             alert('You entered a larger amount ');
-    
         }else{
             if(Number(amount_field) < JSON.parse(localStorage.getItem(`product${btn_id}`))[3]){
-
                 localStorage.setItem(`product${btn_id}`, JSON.stringify(arrayValues));  
                 alert(`You have successfully deleted ${amount_field } ${product_name}`)
             }else{

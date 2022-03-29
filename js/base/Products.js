@@ -24,7 +24,6 @@ export default class Product{
         field.append(item); 
     }
     productStorage({productNumber,productName,product_id,product_price,product_amount,stock,inputValue}){
-
         let arrayValues = [productNumber,product_id,product_price,product_amount];
 
         if(isNaN(inputValue)){
