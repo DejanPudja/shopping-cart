@@ -131,7 +131,7 @@ btnRemoveAllItems.addEventListener('click', function(){
 btnBuy.addEventListener('click', function(){
     cart.buyProducts();
 })
-
+ 
 
 
 
