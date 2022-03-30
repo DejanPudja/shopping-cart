@@ -1,8 +1,8 @@
 export default class Cart{
-    show(product, stock, total, number){
+    show(product, amount, total, number){
         let field = document.querySelector('.cart-field');
         let totalField = document.querySelector('.js_total').textContent;
-        let result = Number(total * stock);
+        let result = Number(total * amount);
         document.querySelector('.js_total').textContent = (Number(totalField) + result).toFixed(2);
 
         let item = document.createElement('div');
@@ -16,13 +16,13 @@ export default class Cart{
                 <div class="product_price">PRICE: ${product.price}$</div>
             </div>
             <div class="order_buttons">
-                <input class="amountField" type="text" value="${stock}" autocomplete='off'>
+                <input class="amountField" type="text" value="${amount}" autocomplete='off'>
                 <button id="${number}" class="remove_button">Remove from cart</button>
             </div>`;
         field.append(item); 
     }
-    removeProduct({btn_id,product_id,product_name,product_price,product_amount,amount_field}){
-        let arrayValues = [btn_id,product_id,product_price,product_amount];
+    removeProduct({btn_id, product_id, product_name, product_price, product_amount, amount_field}){
+        let arrayValues = [btn_id, product_id, product_price, product_amount];
 
         if(isNaN(amount_field)){
             alert('You did not enter a numeric value')
@@ -33,7 +33,6 @@ export default class Cart{
                 localStorage.setItem(`product${btn_id}`, JSON.stringify(arrayValues));  
                 alert(`You have successfully deleted ${amount_field } ${product_name}`)
             }else{
-    
                 localStorage.removeItem(`product${btn_id}`);
                 alert(`You have successfully deleted ${amount_field} ${product_name}`)
             }
@@ -54,5 +53,4 @@ export default class Cart{
         localStorage.clear();
         location.reload();
     }
-    
 }

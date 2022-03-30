@@ -5,7 +5,7 @@ export default class Product{
         this.product_photo = photo;
         this.product_price = price;
     }
-    showProducts(){
+    showProducts(amount){
         let field = document.querySelector('.product-field');
         let item = document.createElement('div');
         item.classList = 'product';
@@ -15,7 +15,7 @@ export default class Product{
                 <div class="product_title">${this.product_name}</div>
                 <div class="hidden">${this.product_id}</div>
                 <div class="product_price">PRICE: ${this.product_price}$</div>
-                <div class="product_stock">IN STOCK:<span class='amount'></span></div>
+                <div class="product_stock">IN STOCK:<span class='amount'>${amount == 10 ? 10 : amount == 0 ? 0 : 10 - amount}</span></div>
             </div>
             <div class="order_buttons">
                 <input class="input_amount" type="text" value="1" autocomplete='off'>
@@ -23,8 +23,8 @@ export default class Product{
             </div>`;
         field.append(item); 
     }
-    productStorage({productNumber,productName,product_id,product_price,product_amount,stock,inputValue}){
-        let arrayValues = [productNumber,product_id,product_price,product_amount];
+    productStorage({productNumber, productName, product_id, product_price, product_amount, stock, inputValue}){
+        let arrayValues = [productNumber, product_id, product_price, product_amount];
 
         if(isNaN(inputValue)){
             alert('You did not enter a number');
@@ -33,7 +33,7 @@ export default class Product{
         }else{
             if(inputValue <= stock){
                 if(localStorage.getItem(`product${productNumber}`)){      
-                    localStorage.setItem(`product${productNumber}`, JSON.stringify([productNumber,product_id,product_price,JSON.parse(localStorage.getItem(`product${productNumber}`))[3] + inputValue]));
+                    localStorage.setItem(`product${productNumber}`, JSON.stringify([productNumber, product_id, product_price, JSON.parse(localStorage.getItem(`product${productNumber}`))[3] + inputValue]));
                 }else{
                     localStorage.setItem(`product${productNumber}`, JSON.stringify(arrayValues));
                 }
@@ -54,25 +54,30 @@ export default class Product{
                 arrayProductNumber[i] = JSON.parse(localStorage.getItem(`product${i+1}`))[0];
             }
         }
-        let newArrayId = arrayIdFromStorage.filter(n=>n);
-        let newProductNumber = arrayProductNumber.filter(n=>n);
-
-        return {newArrayId,newProductNumber};
-
+        return this.clearEmptySpaceFromArray(arrayIdFromStorage,arrayProductNumber);
     }
-    // getAmountFromStorage(){
-    //     const amountProducts = [];
-    //     for(let i = 0; i < 6; i++ ){
-    //         if(localStorage.getItem(`product${i+1}`)){
-    //             if(JSON.parse(localStorage.getItem(`product${i+1}`))[3] == 10){
-    //                 amountProducts[i] = 0;
-    //             }else{
-    //                 amountProducts[i] = JSON.parse(localStorage.getItem(`product${i+1}`))[3]
-    //             }
-    //         }else{
-    //             amountProducts[i] = 10;
-    //         }
-    //         return amountProducts[i];
-    //     }
-    // }
+    clearEmptySpaceFromArray(array1,array2){
+        let newArrayId = array1.filter(n=>n);
+        let newProductNumber = array2.filter(n=>n);
+        return {newArrayId,newProductNumber}
+    }
+    getAmountFromStorage(){
+        const amountProducts = [];
+        for(let i = 0; i < 6; i++ ){
+            if(localStorage.getItem(`product${i+1}`)){
+                if(JSON.parse(localStorage.getItem(`product${i+1}`))[3] == 10){
+                    amountProducts[i] = 0;
+                }else{
+                    amountProducts[i] = JSON.parse(localStorage.getItem(`product${i+1}`))[3]
+                }
+            }else{
+                amountProducts[i] = 10;
+            }
+        }
+        return amountProducts;
+    }
+    productIndex(index){
+        let indexAmount = this.getAmountFromStorage()[index];
+        return indexAmount;
+    }
 }
