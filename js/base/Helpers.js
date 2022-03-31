@@ -1,4 +1,4 @@
-export {btnCard,btnSearch,btnAdd,btnRemove,btnCheckout,btnRemoveAllItems,btnBuy,card,search,email,password,btnSumbit, login,logOut};
+export {btnCard,btnSearch,btnAdd,btnRemove,btnCheckout,btnRemoveAllItems,btnBuy,card,search,email,password,btnLogin, login, logOut};
 
 function btnCard(){
     return document.querySelector('.go_to_cart_button');
@@ -31,13 +31,13 @@ function login(){
     return document.querySelector('.login');
 }
 function email(){
-    return document.querySelector('.email').value;
+    return document.querySelector('.email_login').value;
 }
 function password(){
-    return document.querySelector('.password').value;
+    return document.querySelector('.password_login').value;
 }
-function btnSumbit(){
-    return document.querySelector('.btn_submit');
+function btnLogin(){
+    return document.querySelector('.btn_login');
 }
 function logOut(){
     return document.querySelector('.log_out');

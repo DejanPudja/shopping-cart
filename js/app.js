@@ -1,7 +1,7 @@
 import ApiClient from "./base/ApiClient.js";
 import Product from "./base/Products.js";
 import Cart from "./base/Cart.js";
-import {btnCard,btnSearch,btnAdd,btnRemove,btnCheckout,btnRemoveAllItems,btnBuy,card,search,email,password, btnSumbit, login, logOut} from './base/Helpers.js'
+import {btnCard,btnSearch,btnAdd,btnRemove,btnCheckout,btnRemoveAllItems,btnBuy,card,search,email,password, btnLogin, login, logOut,} from './base/Helpers.js'
 
 
 let APIClient = new ApiClient();
@@ -9,7 +9,7 @@ const products = await APIClient.get('SearchProducts');
 const users = await APIClient.getUser();
 
 //Login
-btnSumbit().addEventListener('click', () =>{
+btnLogin().addEventListener('click', () =>{
 
     if(email() == ''){
         alert('Wrong enter');
