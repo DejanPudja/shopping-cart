@@ -1,74 +1,46 @@
 import ApiClient from "./base/ApiClient.js";
 import Product from "./base/Products.js";
 import Cart from "./base/Cart.js";
-import {btnCard,btnSearch,btnAdd,btnRemove,btnCheckout,btnRemoveAllItems,btnBuy,card,search,email,password, btnSumbit, login,logOut} from './base/Helpers.js'
+import {btnCard,btnSearch,btnAdd,btnRemove,btnCheckout,btnRemoveAllItems,btnBuy,card,search,email,password, btnSumbit, login, logOut} from './base/Helpers.js'
 
 
 let APIClient = new ApiClient();
 const products = await APIClient.get('SearchProducts');
 const users = await APIClient.getUser();
 
-// let niz = users.find(elem => elem == 'pero.peric@gmail.com' );
-let a = 'pero.peric@gmail.com';
-let b = email();
-if(users.find(e => e.email == 'pero.peric@gmail.com')){
-    console.log(1);
-
-}
-
-var niz = users.find(e => e.email == 'pero.peric@gmail.com')
-// 	if(post.email == `pero.peric@gmail.com`)
-// 		return true;
-//     else{
-//         console.log(1);
-//     }
-// });
-
-// console.log(niz);
 //Login
-console.log(users);
-
 btnSumbit().addEventListener('click', () =>{
 
-
-    
-        // if(email() == users[0].email && password() == users[0].password || email() == users[1].email && password() == users[1].password){
-        //     card().classList.add('hidden');
-        //     search().classList.remove('hidden');
-        //     login().classList.add('hidden');
-    
-        //     localStorage.setItem('user', JSON.stringify(1))
-        //     alert('Success login')
-        // }else{
-        //     alert('Wrong email or password');
-        // }
-    
+    if(email() == ''){
+        alert('Wrong enter');
+    }else{
+        let user = users.find(e => e.email == email())
+        if(user == null){
+            alert('Wrong email');
+        }else{
+            if(user.password == password()){
+                card().classList.add('hidden');
+                search().classList.remove('hidden');
+                login().classList.add('hidden');
+        
+                localStorage.setItem('user', JSON.stringify(1))
+                alert('Success login')    
+            }else{
+                alert('Wrong password');
+            }
+        }
+    }  
 })
 
 if(localStorage.getItem('user')){
     login().classList.add('hidden');
     search().classList.remove('hidden');
 }
-
+//Log out
 logOut().addEventListener('click', ()=>{
     localStorage.clear();
     location.reload();
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Show products
 for(let i = 0; i < products.length; i++){

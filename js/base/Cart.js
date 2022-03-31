@@ -40,7 +40,7 @@ export default class Cart{
         location.reload();
     }
     removeAllItemsFromStorage(){
-        if(localStorage.length !== 0){
+        if(localStorage.length -1 !== 0){
             alert(`You have successfully deleted all items`);
         }
         localStorage.clear();
@@ -48,7 +48,7 @@ export default class Cart{
         location.reload();
     }
     buyProducts(){
-        if(localStorage.length !== 0){
+        if(localStorage.length - 1 !== 0){
             alert('You have successfully made a purchase')
         }
         localStorage.clear();
