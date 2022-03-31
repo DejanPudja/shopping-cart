@@ -1,4 +1,4 @@
-export {btnCard,btnSearch,btnAdd,btnRemove,btnCheckout,btnRemoveAllItems,btnBuy,card,search};
+export {btnCard,btnSearch,btnAdd,btnRemove,btnCheckout,btnRemoveAllItems,btnBuy,card,search,email,password,btnSumbit, login,logOut};
 
 function btnCard(){
     return document.querySelector('.go_to_cart_button');
@@ -26,4 +26,19 @@ function card(){
 }
 function search(){
     return document.querySelector('.js_product_page');
+}
+function login(){
+    return document.querySelector('.login');
+}
+function email(){
+    return document.querySelector('.email').value;
+}
+function password(){
+    return document.querySelector('.password').value;
+}
+function btnSumbit(){
+    return document.querySelector('.btn_submit');
+}
+function logOut(){
+    return document.querySelector('.log_out');
 }

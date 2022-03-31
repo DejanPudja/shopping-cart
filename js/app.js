@@ -1,11 +1,74 @@
 import ApiClient from "./base/ApiClient.js";
 import Product from "./base/Products.js";
 import Cart from "./base/Cart.js";
-import {btnCard,btnSearch,btnAdd,btnRemove,btnCheckout,btnRemoveAllItems,btnBuy,card,search} from './base/Helpers.js'
+import {btnCard,btnSearch,btnAdd,btnRemove,btnCheckout,btnRemoveAllItems,btnBuy,card,search,email,password, btnSumbit, login,logOut} from './base/Helpers.js'
 
 
 let APIClient = new ApiClient();
 const products = await APIClient.get('SearchProducts');
+const users = await APIClient.getUser();
+
+// let niz = users.find(elem => elem == 'pero.peric@gmail.com' );
+let a = 'pero.peric@gmail.com';
+let b = email();
+if(users.find(e => e.email == 'pero.peric@gmail.com')){
+    console.log(1);
+
+}
+
+var niz = users.find(e => e.email == 'pero.peric@gmail.com')
+// 	if(post.email == `pero.peric@gmail.com`)
+// 		return true;
+//     else{
+//         console.log(1);
+//     }
+// });
+
+// console.log(niz);
+//Login
+console.log(users);
+
+btnSumbit().addEventListener('click', () =>{
+
+
+    
+        // if(email() == users[0].email && password() == users[0].password || email() == users[1].email && password() == users[1].password){
+        //     card().classList.add('hidden');
+        //     search().classList.remove('hidden');
+        //     login().classList.add('hidden');
+    
+        //     localStorage.setItem('user', JSON.stringify(1))
+        //     alert('Success login')
+        // }else{
+        //     alert('Wrong email or password');
+        // }
+    
+})
+
+if(localStorage.getItem('user')){
+    login().classList.add('hidden');
+    search().classList.remove('hidden');
+}
+
+logOut().addEventListener('click', ()=>{
+    localStorage.clear();
+    location.reload();
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Show products
 for(let i = 0; i < products.length; i++){
@@ -17,7 +80,7 @@ for(let i = 0; i < products.length; i++){
 let cart = new Cart();
 let niz1 = product.getProductsFromStorage(products);
 
-for(let i = 0; i < localStorage.length; i++){
+for(let i = 0; i < localStorage.length-1; i++){
     cart.show(await APIClient.get('GetProduct', {id: niz1.newArrayId[i]}), 
               JSON.parse(localStorage.getItem(`product${niz1.newProductNumber[i]}`))[3],
               JSON.parse(localStorage.getItem(`product${niz1.newProductNumber[i]}`))[2],
@@ -70,7 +133,7 @@ for (let i = 0; i < btnRemove().length; i++){
 }
 //Checkout
 btnCheckout().addEventListener('click', function(){
-    for(let i = 0; i < localStorage.length; i++){
+    for(let i = 0; i < localStorage.length-1; i++){
         APIClient.post('Purchase', [
             {
                 product_id:  JSON.parse(localStorage.getItem(`product${niz1.newProductNumber[i]}`))[1],
@@ -86,4 +149,7 @@ btnRemoveAllItems().addEventListener('click', function(){
 //Buy products
 btnBuy().addEventListener('click', function(){
     cart.buyProducts();
+    login().classList.add('hidden');
+    search().classList.remove('hidden');
 })
+

@@ -87,4 +87,16 @@ export default class ApiClient {
             }
         ];
     }
+    async getUser(){
+        try{
+            const url = 'js/db.json';
+            const response = await fetch(url);
+            const data = await response.json();
+
+            return data;
+        }catch(err){
+            console.error();
+        }
+        
+    }
 }

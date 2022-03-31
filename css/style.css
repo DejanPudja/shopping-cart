@@ -42,7 +42,8 @@ h1 {
 .input_amount, .amountField {
     width: 50px
 }
-.go_to_cart_button, .checkout_button, .search_button {position: absolute;
+.go_to_cart_button, .checkout_button, .search_button, .log_out {
+    position: absolute;
     top: 60px;
     right: 60px;
     width: 150px;
@@ -50,7 +51,7 @@ h1 {
     font-size: 17px;
     cursor: pointer;
 }
-.checkout_button {
+.checkout_button, .log_out{
     top: 120px;
 }
 .remove_btn,.buy_btn{

@@ -44,6 +44,7 @@ export default class Cart{
             alert(`You have successfully deleted all items`);
         }
         localStorage.clear();
+        localStorage.setItem('user', JSON.stringify(1));
         location.reload();
     }
     buyProducts(){
@@ -51,6 +52,7 @@ export default class Cart{
             alert('You have successfully made a purchase')
         }
         localStorage.clear();
+        localStorage.setItem('user', JSON.stringify(1));
         location.reload();
     }
 }
